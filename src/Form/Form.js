@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Validator from '../Validator';
-import FormField from './FormField'
+import FormField from './FormField';
+
+import styles from  './Form.css';
 
 class Form extends Component {
   static propTypes = {
@@ -47,7 +49,7 @@ class Form extends Component {
     const { formFields, errors } = this.state;
     return (
       <div>
-        <form name={name} onSubmit={this.onSubmit}>
+        <form name={name} onSubmit={this.onSubmit} className={styles["tera-form"]}>
           {Object.entries(fields).map(([key, value]) =>
             <FormField
               key={key}

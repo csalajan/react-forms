@@ -16,6 +16,9 @@ export default class App extends Component {
           config={{
             fields: {
               name: 'text',
+              something: 'checkbox',
+              radio: 'radio',
+              description: 'textarea',
               place: {
                 type: 'text',
                 validators: Validators.REQUIRED,

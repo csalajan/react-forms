@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import FieldErrors from './FieldErrors'
+import FieldErrors from './FieldErrors';
+
+import styles from './Form.css';
 
 class FormField extends Component {
   static propTypes = {
@@ -37,9 +39,15 @@ class FormField extends Component {
     }
 
     switch (type) {
+      case 'radio':
+        return <input className={styles["form-field-input"]} type="radio" name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.checked)} />;
+      case 'checkbox':
+        return <input className={styles["form-field-input"]} type="checkbox" name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.checked)} />;
+      case 'textarea':
+        return <textarea className={styles["form-field-input"]} name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.value)} />;
       default:
         return (
-          <input type='text' name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.value)} />
+          <input className={[styles["form-field-input"]]} type='text' name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.value)} />
         );
     }
   }
@@ -48,8 +56,8 @@ class FormField extends Component {
     const { name, errors } = this.props;
 
     return (
-      <div>
-        <label htmlFor={name}>{name}</label>
+      <div className={styles["form-field"]}>
+        <label className={styles["form-field-label"]} htmlFor={name}>{name}</label>
         {this.getInputField()}
         {errors &&
           <div className='errors'>

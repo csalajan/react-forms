@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './Form.css';
+
 const FieldErrors = ({ errors }) => {
   if (errors) {
     return (
-      <div className='errors'>
+      <div className={styles["form-field-errors"]}>
         {errors.map(e => <div key={e.validator}>{e.validator}</div>)}
       </div>
     );
