@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save react-forms
+npm install --save react-tera-forms
 ```
 
 ## Usage
@@ -15,12 +15,40 @@ npm install --save react-forms
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'react-forms'
+import Form, { Validators } from 'react-tera-forms'
 
 class Example extends Component {
   render () {
     return (
-      <MyComponent />
+      <Form
+        name='My Form'
+        onSubmit={this.onSubmit}
+        config={{
+          fields: {
+            name: 'text',
+            place: {
+              type: 'text',
+              validators: Validators.REQUIRED,
+            },
+            number: {
+              type: 'text',
+              validators: [
+                Validators.REQUIRED,
+                Validators.NUMBER,
+              ],
+            },
+            home: {
+              type: 'text',
+              validators: [
+                Validators.REQUIRED,
+              ],
+              renderInput: ({value, onChange}) => (
+                <textarea name='Home' value={value} onChange={(event) => onChange('home', event.target.value)} />
+              ),
+            },
+          },
+        }}
+      />
     )
   }
 }
