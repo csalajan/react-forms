@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Form, { Validators } from 'react-forms';
+import Form, { Validators } from 'react-tera-forms';
 
 export default class App extends Component {
   onSubmit(values) {
