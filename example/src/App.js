@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import TextField from '@material-ui/core/TextField';
 import Form, { Validators } from 'react-tera-forms';
 
 export default class App extends Component {
@@ -9,7 +9,7 @@ export default class App extends Component {
 
   render () {
     return (
-      <div>
+      <div className='container'>
         <Form
           name='My Form'
           onSubmit={this.onSubmit}
@@ -18,7 +18,17 @@ export default class App extends Component {
               name: 'text',
               something: 'checkbox',
               radio: 'radio',
-              description: 'textarea',
+              description: {
+                type: 'textarea',
+                rows: 10,
+              },
+              email: {
+                type: 'text',
+                validators: Validators.EMAIL,
+              },
+              stuff: {
+                component: TextField,
+              },
               place: {
                 type: 'text',
                 validators: Validators.REQUIRED,

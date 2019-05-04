@@ -19,6 +19,15 @@ class Form extends Component {
 
   componentDidMount() {
     this.validator = new Validator(this.props.config.fields);
+    const formFields = {};
+    this.validator.fields.forEach(({name, value}) => {
+      console.log(value);
+      formFields[name] = '';
+    });
+
+    this.setState({
+      formFields,
+    });
   }
 
   onSubmit = (event) => {

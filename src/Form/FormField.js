@@ -38,13 +38,17 @@ class FormField extends Component {
       return field.renderInput({value, onChange: this.props.onChange});
     }
 
+    if (field.component) {
+      return <field.component name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.value)} />;
+    }
+
     switch (type) {
       case 'radio':
         return <input className={styles["form-field-input"]} type="radio" name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.checked)} />;
       case 'checkbox':
         return <input className={styles["form-field-input"]} type="checkbox" name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.checked)} />;
       case 'textarea':
-        return <textarea className={styles["form-field-input"]} name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.value)} />;
+        return <textarea rows={field.rows} className={styles["form-field-input"]} name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.value)} />;
       default:
         return (
           <input className={[styles["form-field-input"]]} type='text' name={name} id={name} value={value} onChange={(event) => this.props.onChange(name, event.target.value)} />
@@ -52,12 +56,16 @@ class FormField extends Component {
     }
   }
 
+  capitalize(value) {
+    return value[0].toUpperCase() + value.slice(1);
+  }
+
   render() {
     const { name, errors } = this.props;
 
     return (
       <div className={styles["form-field"]}>
-        <label className={styles["form-field-label"]} htmlFor={name}>{name}</label>
+        <label className={styles["form-field-label"]} htmlFor={name}>{this.capitalize(name)}</label>
         {this.getInputField()}
         {errors &&
           <div className='errors'>
